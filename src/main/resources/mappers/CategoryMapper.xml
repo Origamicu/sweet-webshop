@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.mapper.CategoryMapper">
+
+    <resultMap id="Base_Category_List" type="com.sweet.domain.Vo.CategoryVo">
+        <id property="categoryId" column="category_id"/>
+        <result property="name" column="name"/>
+        <collection property="produceVos" ofType="com.sweet.domain.Vo.ProduceVo"
+                    resultMap="com.sweet.mapper.ProduceMapper.Base_Produce_list"/>
+    </resultMap>
+
+
+
+    <select id="findAll" resultMap="Base_Category_List">
+        SELECT tc.category_id,tc.name,
+        tp.original_price,tp.produce_name,tp.promote_price,tp.detail,tpi.image
+        from t_category tc left JOIN t_produce tp ON tc.category_id = tp.category_id
+        LEFT JOIN t_produce_image tpi ON tp.produce_id = tpi.produce_id
+    </select>
+
+</mapper>

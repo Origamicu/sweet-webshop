@@ -22,4 +22,6 @@ public class Blog implements Serializable {
     private String label;
 
     private Integer isDelete;
+
+    private String BlogImg;
 }

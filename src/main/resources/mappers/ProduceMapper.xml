@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.mapper.ProduceMapper">
+
+    <resultMap id="Base_Produce_Map" type="com.sweet.domain.entity.Produce">
+        <id property="produceId" column="produce_id"/>
+        <result property="stock" column="stock"/>
+        <result property="detail" column="detail"/>
+        <result property="originalPrice" column="original_price"/>
+        <result property="promotePrice" column="promote_price"/>
+        <result property="produceName" column="produce_name"/>
+    </resultMap>
+
+
+    <resultMap id="Base_Produce_list" type="com.sweet.domain.Vo.ProduceVo" extends="Base_Produce_Map">
+        <association property="produceImage"
+                    resultMap="com.sweet.mapper.ProduceImageMapper.Base_ProduceImage_Map"/>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.mapper.BlogMapper">
+
+
+    <resultMap id="Base_Blog_Map" type="com.sweet.domain.entity.Blog">
+        <id property="blogId" column="blog_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="blogImg" column="blog_img"/>
+        <result property="blogTitle" column="blog_title"/>
+        <result property="blogName" column="blog_name"/>
+        <result property="blogDescription" column="blog_descrpition"/>
+    </resultMap>
+
+    <select id="findNewBlogs" resultMap="Base_Blog_Map">
+        SELECT tb.blog_title,tb.create_time,tb.blog_descrpition,tb.blog_img
+        FROM t_blog tb
+        ORDER BY create_time DESC
+        limit 0,2
+    </select>
+
+</mapper>

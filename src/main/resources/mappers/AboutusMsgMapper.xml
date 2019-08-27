@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.mapper.AboutusMsgMapper">
+
+    <resultMap id="Base_AboutusMsg_Map" type="com.sweet.domain.entity.AboutusMsg">
+        <id property="aboutusMsgId" column="aboutus_msg_id"/>
+        <result property="allMsg" column="all_msg"/>
+        <result property="chatMsg" column="chat_msg"/>
+        <result property="expectMsg" column="expect_msg"/>
+        <result property="mainMsg" column="main_msg"/>
+        <result property="teamMsg" column="team_msg"/>
+    </resultMap>
+
+
+</mapper>

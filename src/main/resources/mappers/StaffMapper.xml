@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.mapper.StaffMapper">
+
+    <resultMap id="Base_Staff_Map" type="com.sweet.domain.entity.Staff">
+        <id property="staffId" column="staff_id"/>
+        <result property="name" column="name"/>
+        <result property="character" column="character"/>
+        <result property="img" column="img"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="Base_Staff_Map">
+        SELECT ts.staff_id,ts.name,ts.character,ts.img,ts.status
+        FROM t_staff ts
+    </select>
+</mapper>
