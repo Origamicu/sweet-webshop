@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.mapper.BlogSortMapper">
+
+    <resultMap id="Base_Blog_Sort" type="com.sweet.domain.entity.BlogSort">
+        <id property="sortId" column="sort_id" />
+        <result property="blogId" column="blog_id" />
+        <result property="isDelete" column="is_delete" />
+        <result property="sortName" column="sort_name" />
+    </resultMap>
+
+    <select id="findAllSort" resultMap="Base_Blog_Sort">
+        select distinct sort_name
+        from t_blog_sort
+        where is_delete = 1
+    </select>
+</mapper>

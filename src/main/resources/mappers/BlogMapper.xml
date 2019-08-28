@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.mapper.BlogMapper">
+
+    <resultMap id="Base_Blog" type="com.sweet.domain.entity.Blog">
+        <id property="blogId" column="blog_id" />
+        <result property="createTime" column="create_time" />
+        <result property="blogDescription" column="blog_dsecription" />
+        <result property="isDelete" column="is_delete" />
+        <result property="blogTitle" column="blog_title" />
+        <result property="blogImg" column="blog_img" />
+        <result property="blogKeyword" column="blog_keyword" />
+        <result property="sortId" column="sort_id" />
+        <result property="blogName" column="blog_Name" />
+    </resultMap>
+
+    <!--1. blog-Standard / blog-list 页面展示查询-->
+    <select id="findAll" resultMap="Base_Blog">
+        select blog_id,create_time,blog_descrpition,is_delete,blog_title
+        from t_blog
+        where is_delete = 1
+        limit #{page},#{size}
+    </select>
+
+    <!--2.最新的三个博客-->
+    <select id="findNew" resultMap="Base_Blog">
+        select blog_id,blog_title,create_time,blog_img
+        from t_blog
+        where is_delete = 1
+        order by create_time desc
+        limit 0,3
+    </select>
+
+    <!--3.按关键字分类统计博客数-->
+    <select id="CountkeyWord" resultMap="Base_Blog">
+        select count(blog_id)
+        from t_blog
+        where is_delete = 1 and blog_keyword = '#{keyword}'
+    </select>
+
+</mapper>

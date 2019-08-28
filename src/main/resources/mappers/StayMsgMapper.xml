@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweet.mapper.StayMsgMapper">
+
+    <resultMap id="Base_Stay_Msg" type="com.sweet.domain.entity.StayMsg">
+        <id property="stayId" column="stay_id" />
+        <result property="blogId" column="blog_id" />
+        <result property="uid" column="uid" />
+        <result property="stayMsg" column="stay_msg" />
+        <result property="stayTime" column="stay_time" />
+        <result property="isDelete" column="is_delete" />
+    </resultMap>
+
+    <resultMap id="Base_Stay_Msg_Vo" type="com.sweet.domain.vo.StayMsgVo" extends="Base_Stay_Msg">
+        <association property="user" resultMap="com.sweet.mapper.UserMapper.Base_User">
+
+        </association>
+    </resultMap>
+
+    <!--通过博客id查询相关评论-->
+    <select id="findByblogId" resultMap="Base_Stay_Msg_Vo">
+        select s.blog_id,s.stay_msg,s.stay_time,s.is_delete,s.uid,
+        u.icon,u.name,u.status
+        from t_stay_msg s left join t_user u on s.uid = u.uid
+        where s.blog_id = #{blogId}
+    </select>
+</mapper>
