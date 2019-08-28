@@ -19,7 +19,9 @@ public class Blog implements Serializable {
 
     private Date createTime;
 
-    private String label;
-
     private Integer isDelete;
+
+    private String blogImg;
+
+    private Integer sortId;
 }

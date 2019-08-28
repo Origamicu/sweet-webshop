@@ -3,6 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sweet.mapper.UserMapper">
 
+    <resultMap id="Base_User" type="com.sweet.domain.entity.User">
+        <id property="uid" column="uid" />
+        <result property="createTime" column="create_time" />
+        <result property="lastLogin" column="last_login" />
+        <result property="icon" column="icon" />
+        <result property="name" column="name" />
+        <result property="password" column="password" />
+        <result property="username" column="username" />
+        <result property="email" column="email" />
+        <result property="answer" column="answer" />
+        <result property="phone" column="phone" />
+        <result property="question" column="question" />
+        <result property="status" column="status" />
+    </resultMap>
 
     <sql id="base_sql">
         password
