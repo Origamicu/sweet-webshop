@@ -6,5 +6,12 @@ import lombok.Data;
 public class BlogKeyword {
     private String keyword;
 
-    private String number;
+    private Integer number;
+
+    public static BlogKeyword getInstance(String keyword,int number) {
+        BlogKeyword blogKeyword = new BlogKeyword();
+        blogKeyword.setKeyword(keyword);
+        blogKeyword.setNumber(number);
+        return blogKeyword;
+    }
 }

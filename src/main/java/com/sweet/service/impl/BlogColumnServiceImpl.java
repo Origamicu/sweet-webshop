@@ -2,19 +2,18 @@ package com.sweet.service.impl;
 
 import com.sweet.domain.entity.Blog;
 import com.sweet.domain.entity.BlogSort;
-import com.sweet.domain.entity.StayMsg;
 import com.sweet.domain.vo.StayMsgVo;
 import com.sweet.mapper.BlogMapper;
 import com.sweet.mapper.BlogSortMapper;
 import com.sweet.mapper.StayMsgMapper;
 import com.sweet.service.BlogColumnService;
 import com.sweet.utils.BlogKeyword;
+import com.sweet.utils.BlogTotal;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static com.sweet.utils.Constants.BLOG_KEYWORD;
 
@@ -22,8 +21,6 @@ import static com.sweet.utils.Constants.BLOG_KEYWORD;
 public class BlogColumnServiceImpl implements BlogColumnService {
     @Resource
     BlogMapper blogMapper;
-    @Resource
-    BlogKeyword blogKeyword;
     @Resource
     BlogSortMapper blogSortMapper;
     @Resource
@@ -55,10 +52,9 @@ public class BlogColumnServiceImpl implements BlogColumnService {
     public List<BlogKeyword> CountKeyword() {
         List<BlogKeyword> list = new ArrayList<>();
         for (String keyword : BLOG_KEYWORD) {
-            String s = blogMapper.CountkeyWord(keyword).toString();
-            blogKeyword.setKeyword(keyword);
-            blogKeyword.setNumber(s);
-            list.add(blogKeyword);
+            int i = blogMapper.countKeyWord(keyword);
+            BlogKeyword instance = BlogKeyword.getInstance(keyword, i);
+            list.add(instance);
         }
         return list;
     }
@@ -81,5 +77,21 @@ public class BlogColumnServiceImpl implements BlogColumnService {
     @Override
     public List<StayMsgVo> findStayMsgByBlogId(int blogId) {
        return stayMsgMapper.findByblogId(blogId);
+    }
+
+    /**
+     * 统计博客数
+     * @return
+     */
+    @Override
+    public BlogTotal countBlog(int size) {
+        int numTotal= blogMapper.countBlog();
+        int pageTotal = 0;
+        if(numTotal % size > 0) {
+            pageTotal = numTotal / size +1;
+        }else {
+            pageTotal = numTotal / size;
+        }
+        return BlogTotal.getInstance(numTotal,pageTotal);
     }
 }

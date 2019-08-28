@@ -5,7 +5,7 @@
     <resultMap id="Base_Blog" type="com.sweet.domain.entity.Blog">
         <id property="blogId" column="blog_id" />
         <result property="createTime" column="create_time" />
-        <result property="blogDescription" column="blog_dsecription" />
+        <result property="blogDescription" column="blog_description" />
         <result property="isDelete" column="is_delete" />
         <result property="blogTitle" column="blog_title" />
         <result property="blogImg" column="blog_img" />
@@ -16,7 +16,7 @@
 
     <!--1. blog-Standard / blog-list 页面展示查询-->
     <select id="findAll" resultMap="Base_Blog">
-        select blog_id,create_time,blog_descrpition,is_delete,blog_title
+        select blog_id,create_time,blog_description,is_delete,blog_title,blog_img
         from t_blog
         where is_delete = 1
         limit #{page},#{size}
@@ -32,10 +32,18 @@
     </select>
 
     <!--3.按关键字分类统计博客数-->
-    <select id="CountkeyWord" resultMap="Base_Blog">
+    <select id="countKeyWord" resultType="Integer">
+        select count(blog_id) num
+        from t_blog
+        where is_delete = 1 and blog_keyword = #{keyword}
+    </select>
+
+    <!--4.统计有多少条博客-->
+    <select id="countBlog" resultType="Integer">
         select count(blog_id)
         from t_blog
-        where is_delete = 1 and blog_keyword = '#{keyword}'
+        where is_delete = 1
     </select>
+
 
 </mapper>

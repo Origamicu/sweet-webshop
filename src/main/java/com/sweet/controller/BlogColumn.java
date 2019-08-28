@@ -6,8 +6,8 @@ import com.sweet.domain.entity.BlogSort;
 import com.sweet.domain.vo.StayMsgVo;
 import com.sweet.service.BlogColumnService;
 import com.sweet.utils.BlogKeyword;
+import com.sweet.utils.BlogTotal;
 import com.sweet.utils.Result;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +16,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@Slf4j
 @RequestMapping("/blog")
 public class BlogColumn {
     @Resource
@@ -25,7 +24,7 @@ public class BlogColumn {
     /**
      * blog standard 页面展示
      * (page+1) * size
-     * http://localhost:8080/blog/standard/1/10
+     * http://localhost:8080/blog/list/1/10
      * @param page
      * @param size
      * @return
@@ -40,7 +39,7 @@ public class BlogColumn {
         }
     }
 
-    @RequestMapping("/newBlog")
+    @RequestMapping("/newblog")
     public Result blogNew(){
         List<Blog> aNew = blogColumnService.findNew();
         try{
@@ -50,6 +49,10 @@ public class BlogColumn {
         }
     }
 
+    /**
+     * http://localhost:8080/blog/keyword
+     * @return
+     */
     @RequestMapping("/keyword")
     public Result blogCount(){
         List<BlogKeyword> keywords = blogColumnService.CountKeyword();
@@ -75,6 +78,7 @@ public class BlogColumn {
     }
 
     /**
+     * http://localhost:8080/blog/staymsg?blogId=1
      * 博客的相关评论
      */
     @RequestMapping("/staymsg")
@@ -82,6 +86,21 @@ public class BlogColumn {
         List<StayMsgVo> stayMsgs = blogColumnService.findStayMsgByBlogId(blogId);
         try{
             return Result.success(stayMsgs);
+        }catch (Exception e) {
+            return Result.error();
+        }
+    }
+
+    /**
+     * http://localhost:8080/blog/countblog?size=4
+     * 博客总数 和 分页总数
+     * @return
+     */
+    @RequestMapping("/countblog")
+    public Result blogTotal(int size) {
+        BlogTotal blogTotal = blogColumnService.countBlog(size);
+        try{
+            return Result.success(blogTotal);
         }catch (Exception e) {
             return Result.error();
         }

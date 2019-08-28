@@ -4,6 +4,7 @@ import com.sweet.domain.entity.Blog;
 import com.sweet.domain.entity.BlogSort;
 import com.sweet.domain.vo.StayMsgVo;
 import com.sweet.utils.BlogKeyword;
+import com.sweet.utils.BlogTotal;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface BlogColumnService {
     List<BlogKeyword> CountKeyword();
     List<BlogSort> findAllSort();
     List<StayMsgVo> findStayMsgByBlogId(int blogId);
+    BlogTotal countBlog(int size);
 }
