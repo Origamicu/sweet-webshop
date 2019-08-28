@@ -10,6 +10,6 @@ public interface AboutusMapper {
 
     AboutusVo findById(@Param("aboutusId") int aboutusId);
 
-    List<Aboutus> findAll();
+//    List<Aboutus> findAll();
 
 }

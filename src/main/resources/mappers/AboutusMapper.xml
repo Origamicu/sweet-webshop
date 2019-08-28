@@ -26,9 +26,9 @@
         where a.aboutus_id= #{aboutusId}
     </select>
 
-    <select id="findAll" resultMap="Base_Aboutus_Map">
-        SELECT <include refid="base_sql"/>
-        from t_aboutus a left JOIN t_aboutus_msg m ON a.aboutus_id=m.aboutus_id
-    </select>
+    <!--<select id="findAll" resultMap="Base_Aboutus_Map">-->
+        <!--SELECT <include refid="base_sql"/>-->
+        <!--from t_aboutus a left JOIN t_aboutus_msg m ON a.aboutus_id=m.aboutus_id-->
+    <!--</select>-->
 
 </mapper>

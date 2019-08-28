@@ -4,8 +4,10 @@ package com.sweet.service.impl;
 import com.sweet.domain.Vo.AboutusVo;
 import com.sweet.domain.Vo.CategoryVo;
 import com.sweet.domain.Vo.ProduceVo;
+import com.sweet.domain.entity.Banner;
 import com.sweet.domain.entity.Blog;
 import com.sweet.mapper.AboutusMapper;
+import com.sweet.mapper.BannerMapper;
 import com.sweet.mapper.BlogMapper;
 import com.sweet.mapper.CategoryMapper;
 import com.sweet.service.IndexService;
@@ -22,6 +24,8 @@ public class IndexServiceImpl implements IndexService {
     CategoryMapper categoryMapper;
     @Resource
     BlogMapper blogMapper;
+    @Resource
+    BannerMapper bannerMapper;
 
     @Override
     public AboutusVo getAboutus(int aboutusId) {
@@ -36,6 +40,11 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public List<Blog> getNewBlogs() {
         return blogMapper.findNewBlogs();
+    }
+
+    @Override
+    public List<Banner> getBannerImages() {
+        return bannerMapper.findAll();
     }
 
 
